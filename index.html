@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="appTitle">多通道波形CSV生成工具</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-left">
+        <h1 class="header-title" data-i18n="appTitle">多通道波形CSV生成工具</h1>
+        <button id="btnLang" class="btn-lang" title="切换语言 / Switch Language">EN</button>
+      </div>
+      <div class="header-right">
+        <span class="header-status" id="headerStatus" data-i18n="systemReady">系统就绪</span>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <!-- Left Panel: Configuration -->
+      <aside class="left-panel">
+        <!-- Global Parameters -->
+        <section class="panel-section">
+          <h2 class="section-title" data-i18n="globalParams">全局参数配置</h2>
+          <div class="param-grid">
+            <div class="param-row">
+              <label class="param-label" for="timeInterval" data-i18n="timeInterval">时间间隔</label>
+              <div class="param-input-group">
+                <input type="text" id="timeInterval" value="2" class="param-input" data-param="timeInterval" autocomplete="off">
+                <span class="param-unit">ms</span>
+              </div>
+            </div>
+            <div class="param-row">
+              <label class="param-label" for="dataLength" data-i18n="dataLength">数据长度</label>
+              <div class="param-input-group">
+                <input type="text" id="dataLength" value="2048" class="param-input" data-param="dataLength" autocomplete="off">
+                <span class="param-unit" data-i18n="points">个</span>
+              </div>
+            </div>
+            <div class="param-row">
+              <label class="param-label" for="channelCount" data-i18n="channelCount">通道数</label>
+              <div class="param-input-group">
+                <input type="text" id="channelCount" value="2" class="param-input" data-param="channelCount" autocomplete="off">
+                <span class="param-unit" data-i18n="channels">路</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Channel Configuration -->
+        <section class="panel-section channel-section">
+          <h2 class="section-title" data-i18n="channelConfig">通道波形配置</h2>
+          <div id="channelContainer" class="channel-container">
+            <!-- Dynamically generated -->
+          </div>
+        </section>
+
+        <!-- Preset Management -->
+        <section class="panel-section">
+          <h2 class="section-title" data-i18n="presets">参数预设管理</h2>
+          <div class="preset-controls">
+            <div class="preset-row">
+              <input type="text" id="presetName" class="preset-name-input" autocomplete="off" data-i18n-placeholder="presetPlaceholder">
+              <button id="btnSavePreset" class="btn btn-accent" data-i18n="savePreset">保存预设</button>
+            </div>
+            <div class="preset-row">
+              <select id="presetSelect" class="preset-select">
+                <option value="" data-i18n="selectPreset">-- 选择预设 --</option>
+              </select>
+              <button id="btnLoadPreset" class="btn btn-primary" data-i18n="loadPreset">加载预设</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Generate Button -->
+        <section class="panel-section generate-section">
+          <button id="btnGenerate" class="btn btn-generate" data-i18n="generate">生 成</button>
+        </section>
+      </aside>
+
+      <!-- Right Panel: Preview -->
+      <main class="right-panel">
+        <section class="panel-section preview-section">
+          <div class="preview-toolbar">
+            <h2 class="section-title" style="margin-bottom:0;border-bottom:none;padding-bottom:0" data-i18n="wavePreview">波形预览</h2>
+            <div class="zoom-controls">
+              <button id="btnZoomIn" class="btn btn-zoom" title="放大 / Zoom in">+</button>
+              <button id="btnZoomOut" class="btn btn-zoom" title="缩小 / Zoom out">&minus;</button>
+              <button id="btnZoomReset" class="btn btn-zoom" title="重置缩放 / Reset zoom">R</button>
+            </div>
+          </div>
+          <div class="canvas-wrapper">
+            <canvas id="waveCanvas"></canvas>
+          </div>
+          <div id="legendContainer" class="legend-container"></div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="renderer.js"></script>
+</body>
+</html>

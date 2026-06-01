@@ -1,0 +1,16 @@
+{
+  "name": "wave-generation",
+  "version": "1.0.0",
+  "description": "多通道波形CSV生成工具",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^33.4.11"
+  }
+}
