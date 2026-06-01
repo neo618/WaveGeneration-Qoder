@@ -1,83 +1,83 @@
 # 多通道波形CSV生成工具
 
-**Multi-Channel Waveform CSV Generator** — An Electron desktop application for generating multi-channel waveform data and exporting as CSV files.
+基于 Electron 的桌面应用程序，用于生成多通道波形数据并导出为 CSV 文件。
 
-## Features
+## 功能特性
 
-- **4 Waveform Types**: Sine, Square, Triangle, and Uniform Random
-- **Multi-Channel**: Up to 10 independently configurable channels, each with its own waveform type and parameters
-- **Global Parameters**: Configurable time interval (ms), data length (points), and channel count
-- **Real-Time Preview**: Canvas-based waveform preview with grid, axis labels, and zoom
-- **Zoom Controls**: Mouse wheel zoom (centered at cursor), +/-/R toolbar buttons, zoom level badge
-- **Channel Visibility**: Toggle individual channels on/off via checkbox or clickable legend — hidden channels are still included in CSV export
-- **CSV Export**: Exports to `D:\data\YYYYMMDD_HHMMSS\` with UTF-8 BOM for Excel compatibility
-- **Preset Management**: Save/load full configuration presets (persisted in Electron `userData`)
-- **Internationalization**: Chinese (default) / English language toggle in the header
-- **Dark Theme**: Cyan-accented military/industrial dark UI
+- **4种波形类型**：正弦波、方波、三角波、均匀随机数
+- **多通道支持**：最多10路独立配置通道，每路可设置不同的波形类型和参数
+- **全局参数**：可配置时间间隔（ms）、数据长度（点数）、通道数
+- **实时预览**：基于 Canvas 的波形预览，包含网格、坐标轴标签和缩放功能
+- **缩放控制**：鼠标滚轮缩放（以光标为中心）、+/-/R 工具栏按钮、缩放倍数角标
+- **通道可见性**：通过复选框或可点击图例切换通道显示/隐藏，隐藏的通道仍会包含在 CSV 导出中
+- **CSV 导出**：导出至 `D:\data\YYYYMMDD_HHMMSS\`，带 UTF-8 BOM 以兼容 Excel
+- **预设管理**：保存/加载完整的参数预设（持久化存储在 Electron `userData` 中）
+- **多语言支持**：中文（默认）/ 英文一键切换
+- **暗色主题**：青色主题色的军事/工业风格暗色界面
 
-## Tech Stack
+## 技术栈
 
-| Layer | Technology |
+| 层级 | 技术 |
 |---|---|
-| Runtime | Electron 33.4.11 |
-| UI | Native HTML5 / CSS3 / Vanilla JavaScript |
-| Canvas | Canvas 2D API with manual grid/curve rendering |
-| IPC | `contextBridge` + `ipcMain.handle` (secure isolation) |
-| Data | Float64Array for wave generation, UTF-8 BOM CSV |
-| Storage | Node.js `fs` module for CSV, `app.getPath('userData')` for presets |
+| 运行时 | Electron 33.4.11 |
+| 界面 | 原生 HTML5 / CSS3 / JavaScript |
+| 绘图 | Canvas 2D API，手动网格/曲线渲染 |
+| 进程通信 | `contextBridge` + `ipcMain.handle`（安全隔离） |
+| 数据处理 | Float64Array 波形生成，UTF-8 BOM CSV |
+| 存储 | Node.js `fs` 模块（CSV 导出），`app.getPath('userData')`（预设管理） |
 
-## File Structure
+## 文件结构
 
 ```
-├── main.js            # Electron main process — window, IPC handlers
-├── preload.js         # Context bridge — exposes waveAPI to renderer
-├── index.html         # UI layout — panels, controls, canvas, i18n attributes
-├── renderer.js        # Core logic — wave generation, canvas, zoom, i18n, CSV
-├── styles.css         # Cyan-accented dark theme (CSS custom properties)
-├── package.json       # Project config, Electron dependency
-├── package-lock.json  # Lockfile
-└── 需求.md            # Original requirements (Chinese)
+├── main.js            # Electron 主进程 — 窗口管理、IPC 处理
+├── preload.js         # 预加载脚本 — 暴露 waveAPI 上下文桥接
+├── index.html         # 界面布局 — 面板、控件、Canvas、i18n 属性
+├── renderer.js        # 核心逻辑 — 波形生成、Canvas、缩放、国际化、CSV
+├── styles.css         # 青色调暗色主题（CSS 自定义属性）
+├── package.json       # 项目配置、Electron 依赖
+├── package-lock.json  # 依赖锁定文件
+└── 需求.md            # 原始需求文档
 ```
 
-## Getting Started
+## 快速开始
 
-### Prerequisites
+### 环境要求
 
 - [Node.js](https://nodejs.org/) >= 16
 - npm >= 8
 
-### Install & Run
+### 安装与运行
 
 ```bash
-# Clone the repository
+# 克隆仓库
 git clone https://github.com/neo618/WaveGeneration-Qoder.git
 cd WaveGeneration-Qoder
 
-# Install dependencies
+# 安装依赖
 npm install
 
-# Launch the application
+# 启动应用
 npm start
 ```
 
-## Usage
+## 使用说明
 
-1. **Set Global Parameters** — Configure time interval (ms), data length (points), and number of channels (1–10) in the left panel.
+1. **设置全局参数** — 在左侧面板配置时间间隔（ms）、数据长度（点数）和通道数（1-10）。
 
-2. **Configure Channels** — For each channel, select a waveform type (正弦波/方波/三角波/均匀随机数) and set type-specific parameters:
-   - Sine/Square/Triangle: Amplitude, Frequency (kHz), DC Offset, Initial Phase (rad)
-   - Random: Min, Max
+2. **配置通道** — 为每个通道选择波形类型（正弦波/方波/三角波/均匀随机数），并设置类型相关参数：
+   - 正弦波/方波/三角波：幅值、频率（kHz）、直流偏移、初始相位（rad）
+   - 随机数：下限、上限
 
-3. **Preview Waveforms** — The right panel shows a real-time canvas preview:
-   - Scroll to zoom in/out (centered at cursor)
-   - Use +/-/R buttons in the toolbar
-   - Toggle channel visibility via checkboxes or clickable legend items
+3. **预览波形** — 右侧面板显示实时 Canvas 预览：
+   - 滚轮缩放（以鼠标位置为中心）
+   - 使用工具栏 +/-/R 按钮
+   - 通过复选框或点击图例切换通道显示
 
-4. **Save/Load Presets** — Save your configuration with a name, then load it later from the dropdown.
+4. **保存/加载预设** — 将当前配置保存为预设名称，之后可从下拉菜单加载。
 
-5. **Generate CSV** — Click the **生 成** (Generate) button to export all channels to a timestamped CSV file at `D:\data\`.
+5. **生成 CSV** — 点击 **生 成** 按钮，将所有通道数据导出到带时间戳的 CSV 文件中，保存至 `D:\data\`。
 
-### CSV Output Format
+### CSV 输出格式
 
 ```csv
 时间(ms),V1,V2,...
@@ -87,42 +87,40 @@ npm start
 ...
 ```
 
-The first column is the time in milliseconds. Each subsequent column (V1, V2, ...) corresponds to a channel.
+第一列为时间（毫秒），后续每列（V1, V2, ...）对应一个通道。
 
-### Language Switching
+### 语言切换
 
-Click the **EN** / **中文** button in the top-left header to toggle between Chinese and English UI.
+点击顶部左侧 **EN** / **中文** 按钮即可在中英文界面之间切换。
 
-## Waveform Parameters
+## 波形参数默认值
 
-### Per-Wave-Type Defaults
-
-| Type | Amplitude | Frequency | DC Offset | Phase |
+| 类型 | 幅值 | 频率 | 直流偏移 | 相位 |
 |---|---|---|---|---|
-| Sine | 10.0 | 0.05 kHz | 0.0 | 0.0 rad |
-| Square | 1.0 | 0.05 kHz | 0.0 | 0.0 rad |
-| Triangle | 1.0 | 0.05 kHz | 0.0 | 0.0 rad |
-| Random | — | — | — | — |
+| 正弦波 | 10.0 | 0.05 kHz | 0.0 | 0.0 rad |
+| 方波 | 1.0 | 0.05 kHz | 0.0 | 0.0 rad |
+| 三角波 | 1.0 | 0.05 kHz | 0.0 | 0.0 rad |
+| 随机数 | — | — | — | — |
 
-> **Note**: Default frequency is 50 Hz to avoid aliasing with the 2 ms default time interval (Nyquist limit = 250 Hz at 2 ms sampling).
+> **说明**：默认频率为 50 Hz，以避免在 2 ms 默认时间间隔下产生混叠（2 ms 采样下奈奎斯特极限为 250 Hz）。
 
-## Built With
+## 构建工具
 
-This project was developed entirely through **Vibecoding** — writing natural language prompts to generate, debug, and optimize code — using [**Qoder**](https://qoder.com).
+本项目完全通过 **Vibecoding**（用自然语言提示生成、调试和优化代码）使用 [**Qoder**](https://qoder.com) 开发完成。
 
-| Aspect | Detail |
+| 项目 | 详情 |
 |---|---|
-| Tool | [Qoder CLI](https://qoder.com) — AI-powered vibecoding platform |
-| Model | Qoder — AI coding assistant |
-| Approach | Vibecoding: requirements → code generation → bug fixing → feature iteration → optimization |
-| Process | 100% AI-generated — from Electron IPC architecture to Canvas rendering, i18n system, and CSV export logic |
+| 工具 | [Qoder CLI](https://qoder.com) —— AI 驱动的 Vibecoding 平台 |
+| 模型 | Qoder —— AI 编程助手 |
+| 方式 | Vibecoding：需求描述 → 代码生成 → 问题修复 → 功能迭代 → 优化 |
+| 流程 | 100% AI 生成 —— 从 Electron IPC 架构到 Canvas 渲染、国际化系统、CSV 导出逻辑 |
 
-All code was written by Qoder through iterative prompting. No manual hand-coding was involved.
+所有代码均由 Qoder 通过迭代提示词生成，无需手动编码。
 
-## License
+## 许可证
 
 ISC
 
 ---
 
-Generated with [Qoder](https://qoder.com)
+由 [Qoder](https://qoder.com) 生成
