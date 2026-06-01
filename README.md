@@ -106,6 +106,19 @@ Click the **EN** / **中文** button in the top-left header to toggle between Ch
 
 > **Note**: Default frequency is 50 Hz to avoid aliasing with the 2 ms default time interval (Nyquist limit = 250 Hz at 2 ms sampling).
 
+## Built With
+
+This project was developed entirely through **Vibecoding** using [**Qoder**](https://qoder.com) — an AI-powered development tool. The entire codebase, from the Electron IPC architecture to the canvas rendering engine and i18n system, was generated iteratively through natural language prompting.
+
+| Aspect | Detail |
+|---|---|
+| Platform | [Qoder CLI](https://qoder.com) |
+| Approach | Vibecoding — AI-assisted iterative development |
+| Model | Qoder (AI coding assistant via Qoder platform) |
+| Workflow | Natural language requirements → code generation → bug fixing → feature iteration → optimization |
+
+All code was generated, reviewed, and refined through the Qoder interface without manual hand-coding.
+
 ## License
 
 ISC
