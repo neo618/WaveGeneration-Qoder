@@ -108,16 +108,16 @@ Click the **EN** / **中文** button in the top-left header to toggle between Ch
 
 ## Built With
 
-This project was developed entirely through **Vibecoding** using [**Qoder**](https://qoder.com) — an AI-powered development tool. The entire codebase, from the Electron IPC architecture to the canvas rendering engine and i18n system, was generated iteratively through natural language prompting.
+This project was developed entirely through **Vibecoding** — writing natural language prompts to generate, debug, and optimize code — using [**Qoder**](https://qoder.com).
 
 | Aspect | Detail |
 |---|---|
-| Platform | [Qoder CLI](https://qoder.com) |
-| Approach | Vibecoding — AI-assisted iterative development |
-| Model | Qoder (AI coding assistant via Qoder platform) |
-| Workflow | Natural language requirements → code generation → bug fixing → feature iteration → optimization |
+| Tool | [Qoder CLI](https://qoder.com) — AI-powered vibecoding platform |
+| Model | Qoder — AI coding assistant |
+| Approach | Vibecoding: requirements → code generation → bug fixing → feature iteration → optimization |
+| Process | 100% AI-generated — from Electron IPC architecture to Canvas rendering, i18n system, and CSV export logic |
 
-All code was generated, reviewed, and refined through the Qoder interface without manual hand-coding.
+All code was written by Qoder through iterative prompting. No manual hand-coding was involved.
 
 ## License
 
